@@ -1,0 +1,119 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+    
+    <div class="container text-center mt-4">
+        <div class="row">
+          <div class="col col-md-8 col-lg-8  ">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                  <h1 class="display-5 fw-bold "> Liste des produits en stock </h1>
+                  <table class="table table-bordered  text-dark ">
+                      <thead>
+                          <tr>
+                              <th>id</th>
+                              <th>Nom</th>
+                              <th>Description</th>
+                              <th>Quantité</th>
+                              <th>Fournisseur</th>
+                              <th>Type</th>
+
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for produit in produits %}
+                          <tr>
+                              <td>{{ produit.id }}</td>
+                              <td>{{ produit.nom }}</td>
+                              <td>{{ produit.description }}</td>
+                              <td>{{ produit.quantite }}</td>
+                              <td>{{ produit.fournisseur }}</td>
+                              <td>{{ produit.type }}</td>
+
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+          <!---->
+          <div class="col col-md-4 col-lg-4  ">
+            <div class="p-5 mb-3 bg-light rounded-3">
+              <fieldset class="">
+                <h2>AJOUTEZ UN PRODUIT</h2>
+                  <form method="post" class="row g-3">
+                      {% csrf_token %}
+                      <div>
+                        <div class="mb-3 row">
+                          <label for="produit" class="col-sm-3 col-form-label">Produits</label>
+                            <div class="col-sm-9">
+                              <select class="form-select" aria-label="Default select example">
+                                <option selected>------------</option>
+                                {% for produit in produits %}
+                                  <option >{{ produit.nom }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                        </div>
+
+
+                      <div>
+                        <div class="mb-3 row">
+                          <label for="fournisseur" class="col-sm-3 col-form-label">Fournisseur</label>
+                            <div class="col-sm-9">
+                              <select class="form-select" id="fournisseur" aria-label="Default select example">
+                                <option selected>------------</option>
+                                {% for produit in produits %}
+                                  <option >{{ produit.fournisseur }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>     
+                      </div>
+
+
+                      <div class="mb-3 row">
+                        <label for="quantite" class="col-sm-3 col-form-label">Quantite</label>
+                        <div class="col-sm-9">
+                          <input type="number" class="form-control" id="quantite" placeholder="0">
+                        </div>
+                      </div>
+
+
+                      <div>
+                        <div class="mb-3 row">
+                          <label for="type" class="col-sm-3 col-form-label">Type</label>
+                            <div class="col-sm-9">
+                              <select class="form-select" id="type" aria-label="Default select example">
+                                  <option selected>------------</option>
+                                  <option value="B">Brut</option>
+                                  <option value="F">Fini</option>
+
+
+                              </select>
+                            </div>     
+                      </div>
+
+
+                      <div class="mb-3 row">
+                        <label for="description" class="col-sm-3 col-form-label">Description</label>
+                          <div class="col-sm-9">
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                          </div>
+                      </div>
+
+
+                      <div>
+                          <input class="btn btn-primary" type="submit" value="Envoyez">
+                          <a class="btn btn-secondary" href="#">Quitter</a>
+                      </div>
+                  </form>
+              </fieldset>
+          </div>
+          </div>
+        </div>
+        </div>
+    </div>
+
+
+{% endblock %}
